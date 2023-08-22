@@ -10,6 +10,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
 
 
 class SubCategory(models.Model):
@@ -19,6 +23,10 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = "Подкатегрия"
+        verbose_name_plural = "Подкатегории"
 
 
 class Ads(models.Model):
@@ -42,5 +50,5 @@ class Ads(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = "Ads"
-        verbose_name_plural = "Ads"
+        verbose_name = "Обьявление"
+        verbose_name_plural = "Обьявления"
