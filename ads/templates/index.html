@@ -1,34 +1,52 @@
 {% extends 'base.html' %}
 
 {% block title %}
- home
+ Главная
  {% endblock %}
 
 {% block content %}
-    <div style="display: flex; gap: 20px;flex-wrap: wrap;justify-content: center;">
-        {% for ads in all_ads %}
-        <div class="card" style="width: 28rem">
-            <div class="card-body">
-                <h5 class="card-title">{{ ads.owner }}</h5>
-                <h5 class="card-title">{{ ads.subcategory }}</h5>
-                <h5 class="card-title">{{ ads.title }}</h5>
-                <p class="card-text">{{ ads.description }}</p>
-                <p class="card-text bg-body-tertiary" style="transform: rotate(0)">
-                    {{ ads.price }}
-                </p>
+
+<main>
+    <div class="album py-5 bg-body-tertiary">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for ads in all_ads %}    
+          <div class="col">
+            <div class="card shadow-sm">
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ ads.image.url }}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ ads.title }}</text></img>
+              <div class="card-body">
+                <p class="card-text">{{ ads.owner }}</p>
+                <p class="card-text">{{ ads.description|truncatewords:10 }}</p>
+                <p class="card-text">{{ ads.subcategory }}</p>
+                <p class="card-text">{{ ads.price }}</p>
+
+                <p class="card-text">
                 {% if ads.type == "Хочу научиться" %}
                 <button type="button" class="btn btn-success">{{ads.type}}</button>
                 {% else %}
                 <button type="button" class="btn btn-info">{{ads.type}}</button>
                 {% endif %}
-                <p class="card-text bg-body-tertiary" style="transform: rotate(0)">
-                    {{ads.created_at|date:"d.m.Y"}}
                 </p>
-                <img style="max-width: 100%;" src="{{ ads.image.url }}">
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Посмотреть</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                      <a href="{% url 'update_ad' ads.id %}">Изменить</a>
+                    </button>
+                  </div>
+                  <small class="text-body-secondary">{{ads.created_at|date:"d.m.Y"}}</small>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
+
         {% endfor %}
+        </div>
+      </div>
     </div>
+</main>
+
 {% endblock %}
 
 </html>

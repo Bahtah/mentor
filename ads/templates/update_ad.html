@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Изменить данные
+{% endblock %}
+
+{% block content %}
+    
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form_of_ad.as_p }}
+    <button type="submit">Изменить</button>
+</form>
+
+{% endblock %}
