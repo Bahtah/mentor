@@ -33,14 +33,21 @@ def update_ad(request, pk):
     ad = get_object_or_404(Ads, id=pk)
     
     if request.method == "POST":
-        form = AdForm(request.POST, instance=ad)
+        form = AdForm(request.POST, request.FILES, instance=ad)
         if form.is_valid():
             form.save()
-            return HttpResponse("<h1> Success edited </h1>")
+            return redirect('index')
         else:
-            return HttpResponse("<h1> Error edited </h1>")
+            return render(request, "update_ad.html", {"form_of_ad": form_of_ad})
     else:
         form_of_ad=AdForm(instance=ad)
         return render(request, "update_ad.html", {"form_of_ad": form_of_ad}) 
     
-        
+    
+def retrieve_ad(request, pk):
+    ad = Ads.objects.get(id=pk)
+    context = {
+        "ad": ad
+    }
+    return render(request, "retrieve_ad.html", context=context)
+    

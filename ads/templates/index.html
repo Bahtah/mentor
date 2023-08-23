@@ -30,12 +30,15 @@
 
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Посмотреть</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                      <a href="{% url 'retrieve_ad' ads.id %}">Посмотреть</a>
+                    </button>
                     <button type="button" class="btn btn-sm btn-outline-secondary">
                       <a href="{% url 'update_ad' ads.id %}">Изменить</a>
                     </button>
                   </div>
                   <small class="text-body-secondary">{{ads.created_at|date:"d.m.Y"}}</small>
+                  <small class="text-body-primary">{{ads.update_at|date:"d.m.Y|"|date:"T"}}</small>
                 </div>
               </div>
             </div>
