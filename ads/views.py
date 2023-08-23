@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 
 from .models import Ads, Category
 from .forms import AdForm
@@ -50,4 +51,11 @@ def retrieve_ad(request, pk):
         "ad": ad
     }
     return render(request, "retrieve_ad.html", context=context)
+
+
+def delete_ad(request, pk):
+    ad = Ads.objects.get(id=pk)
+    ad.delete()
+    messages.success(request, "Обьект успешно удален!!!")
+    return redirect('index')
     
