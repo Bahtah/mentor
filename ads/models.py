@@ -5,8 +5,8 @@ from users.models import User
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=100, verbose_name="название")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="создано")
 
     def __str__(self):
         return self.title
@@ -17,9 +17,9 @@ class Category(models.Model):
 
 
 class SubCategory(models.Model):
-    title = models.CharField(max_length=100)
-    category = models.ForeignKey(Category,on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=100, verbose_name="название")
+    category = models.ForeignKey(Category,on_delete=models.CASCADE, verbose_name="категория")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="дата")
 
     def __str__(self):
         return self.title
@@ -38,14 +38,15 @@ class Ads(models.Model):
     ]
 
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank=True, related_name='ads')
-    title = models.CharField(max_length=150)
-    description = models.TextField()
-    price = models.FloatField()
-    image = models.ImageField(upload_to="images/ads/")
+    title = models.CharField(max_length=150, verbose_name="название")
+    description = models.TextField(verbose_name="описание")
+    price = models.FloatField(verbose_name="цена")
+    image = models.ImageField(upload_to="images/ads/", verbose_name="фото")
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ads', null=True, blank=True)
-    type = models.CharField(max_length=100,choices=TYPE_OF_ADS, default=LEARN)
-    created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    type = models.CharField(max_length=100,choices=TYPE_OF_ADS, default=LEARN, verbose_name="тип")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="создано")
+    update_at = models.DateTimeField(auto_now=True, verbose_name="обновлено")
+    
     def __str__(self) -> str:
         return self.title
 
