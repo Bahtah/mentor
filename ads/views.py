@@ -1,10 +1,5 @@
-from typing import Any, Dict
-from django.shortcuts import get_object_or_404, render, redirect, reverse
+from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
-from django.http import HttpResponse
-from django.contrib import messages
-from datetime import datetime, date, time
-from django.views import View
 from django.views.generic import  ListView, DetailView, UpdateView, DeleteView, CreateView
 
 from users.models import User
