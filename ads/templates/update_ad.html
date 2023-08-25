@@ -9,7 +9,7 @@
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
-    {{ form_of_ad.as_p }}
+    {{ form.as_p }}
     <button type="submit">Изменить</button>
 </form>
 
