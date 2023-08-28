@@ -9,7 +9,7 @@ from django.contrib.auth import login, authenticate, logout
 class RegisterView(CreateView):
     form_class = RegistrationForm
     template_name = 'register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('login')
     
     def form_valid(self, form):
         user = form.save()
@@ -23,6 +23,10 @@ class LoginView(LoginView):
     
     def get_success_url(self):
         return reverse_lazy('index')
+    
+    
+class LogoutView(LogoutView):
+    next_page = reverse_lazy('index')
     
 
 class ProfileView(TemplateView):

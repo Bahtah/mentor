@@ -20,11 +20,17 @@
     </nav>
 
     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'login' %}">Логин</a>
-      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'register' %}">Регистрация</a>
+
+      {% if user.is_authenticated %}
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'logout' %}">Выйти</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'profile' %}">Профиль</a>
+      {% else %}
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'login' %}">Войти</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'register' %}">Регистрация</a>
+      {% endif %}
+      
     </nav>
-  
-  </div>
+</div>
 
 <body>
   <div class="container">
